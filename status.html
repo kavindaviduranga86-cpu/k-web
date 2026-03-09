@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status - WhatsApp Web Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wa: {
+                            bg: '#111b21',
+                            panel: '#202c33',
+                            panelLighter: '#2a3942',
+                            primary: '#00a884',
+                            text: '#e9edef',
+                            textMuted: '#8696a0',
+                            border: '#222d34',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0b141a] text-wa-text h-screen w-screen overflow-hidden flex font-sans">
+    
+    <div class="w-full h-full flex bg-wa-bg z-10 w-full">
+        
+        <!-- Left Sidebar (Status List) -->
+        <div class="w-full md:w-[30%] lg:w-[25%] min-w-[350px] border-r border-[#222d34] flex flex-col bg-[#111b21] h-full shadow-xl z-20 transition-transform duration-300">
+            <!-- Sidebar Header -->
+            <div class="h-[108px] bg-[#202c33] flex flex-col justify-end px-6 pb-4 relative">
+                <button onclick="window.location.href='index.html'" class="absolute top-4 right-4 w-10 h-10 rounded-full hover:bg-wa-panelLighter flex items-center justify-center transition text-wa-textMuted hover:text-wa-text">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                <div class="flex items-center">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="Profile" class="w-12 h-12 rounded-full cursor-pointer object-cover">
+                    <div class="ml-4">
+                        <h2 class="text-wa-text text-lg">My status</h2>
+                        <p class="text-wa-textMuted text-sm">No updates</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status List -->
+            <div class="flex-1 overflow-y-auto bg-[#111b21]">
+                <div class="px-6 py-4">
+                    <p class="text-wa-primary text-sm uppercase font-semibold mb-4 tracking-wider">Recent updates</p>
+                    
+                    <!-- Status Item 1 -->
+                    <div class="flex items-center mb-6 cursor-pointer group" onclick="viewStatus('https://images.unsplash.com/photo-1542314831-c6a4d14effd5?w=600&h=800&fit=crop', 'Kamal Perera', 'Today at 9:00 AM')">
+                        <div class="w-14 h-14 rounded-full p-[2px] bg-gradient-to-tr from-wa-primary to-[#00d0a4]">
+                            <img src="https://i.pravatar.cc/150?img=33" class="w-full h-full rounded-full border-2 border-[#111b21] object-cover group-hover:scale-95 transition-transform duration-200">
+                        </div>
+                        <div class="ml-4 border-b border-[#222d34] pb-2 flex-1">
+                            <h3 class="text-md text-wa-text font-medium">Kamal Perera</h3>
+                            <p class="text-sm text-wa-textMuted">Today at 9:00 AM</p>
+                        </div>
+                    </div>
+
+                    <!-- Status Item 2 -->
+                    <div class="flex items-center mb-6 cursor-pointer group" onclick="viewStatus('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=800&fit=crop', 'Nimal Silva', 'Yesterday at 8:30 PM')">
+                        <div class="w-14 h-14 rounded-full p-[2px] bg-[#8696a0]">
+                            <img src="https://i.pravatar.cc/150?img=12" class="w-full h-full rounded-full border-2 border-[#111b21] object-cover group-hover:scale-95 transition-transform duration-200">
+                        </div>
+                        <div class="ml-4 border-b border-[#222d34] pb-2 flex-1">
+                            <h3 class="text-md text-wa-text font-medium">Nimal Silva</h3>
+                            <p class="text-sm text-wa-textMuted">Yesterday at 8:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Area (Status Viewer) -->
+        <div class="hidden md:flex flex-1 bg-[#0b141a] relative justify-center items-center" id="status-viewer">
+            <!-- Welcome state -->
+            <div id="status-welcome" class="text-center">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-wa-panel flex items-center justify-center text-wa-textMuted">
+                    <i class="fa-solid fa-circle-notch text-4xl"></i>
+                </div>
+                <h1 class="text-3xl text-wa-text font-light mb-4">Click on a contact to view their status updates</h1>
+            </div>
+
+            <!-- Active Status View (Hidden initially) -->
+            <div id="status-active" class="hidden w-full h-full justify-center items-center bg-black relative">
+                
+                <!-- Close Button Desktop -->
+                <button onclick="closeStatus()" class="absolute top-8 right-8 text-white z-50 text-2xl opacity-70 hover:opacity-100 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="w-[450px] h-[90vh] max-h-[850px] relative bg-[#111b21] rounded-xl overflow-hidden shadow-2xl flex flex-col">
+                    <!-- Progress Bar -->
+                    <div class="absolute top-0 left-0 w-full p-2 z-20 flex space-x-1">
+                        <div class="h-1 bg-white/30 rounded-full flex-1 overflow-hidden">
+                            <div class="h-full bg-white w-full animate-[progress_5s_linear_forwards]" id="status-progress"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Header -->
+                    <div class="absolute top-4 left-0 w-full p-4 z-20 flex items-center">
+                        <img src="" id="status-user-img" class="w-10 h-10 rounded-full border border-white/20">
+                        <div class="ml-3 text-white">
+                            <h3 id="status-user-name" class="font-medium shadow-md leading-tight">Name</h3>
+                            <p id="status-time" class="text-xs text-white/80 shadow-md">Time</p>
+                        </div>
+                        <div class="flex-1"></div>
+                        <button class="text-white opacity-80 hover:opacity-100 p-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+
+                    <!-- Image -->
+                    <img id="status-media" src="" class="w-full h-full object-contain bg-black z-10" alt="Status">
+
+                    <!-- Content Navigation -->
+                    <div class="absolute inset-0 z-30 flex">
+                        <div class="w-1/3 h-full cursor-pointer" onclick="closeStatus()"></div> <!-- Prev -->
+                        <div class="w-2/3 h-full cursor-pointer" onclick="closeStatus()"></div> <!-- Next -->
+                    </div>
+
+                    <!-- Reply Bar -->
+                    <div class="absolute bottom-4 left-0 w-full px-6 z-40">
+                        <div class="flex flex-col items-center">
+                            <i class="fa-solid fa-chevron-up text-white/70 mb-2 animate-bounce"></i>
+                            <div class="w-full relative">
+                                <input type="text" placeholder="Reply" class="w-full bg-black/40 border border-white/20 text-white rounded-full px-5 py-3 focus:outline-none focus:bg-black/60 backdrop-blur-md transition-all placeholder-white/70">
+                                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2 text-lg">
+                                    <i class="fa-regular fa-face-smile"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile logic inline -->
+    <script>
+        function viewStatus(mediaUrl, name, time) {
+            // For mobile, redirect or show differently, here we handle responsive basically
+            if (window.innerWidth < 768) {
+                document.querySelector('.border-r').classList.add('-translate-x-full');
+                document.querySelector('.border-r').classList.add('absolute');
+                document.getElementById('status-viewer').classList.remove('hidden');
+            }
+            
+            document.getElementById('status-welcome').classList.add('hidden');
+            document.getElementById('status-active').classList.remove('hidden');
+            document.getElementById('status-active').classList.add('flex');
+            
+            document.getElementById('status-media').src = mediaUrl;
+            document.getElementById('status-user-name').innerText = name;
+            document.getElementById('status-time').innerText = time;
+            document.getElementById('status-user-img').src = document.querySelector('.group-hover\\:scale-95').src; // Simplistic fetch
+
+            // Reset animation
+            let progress = document.getElementById('status-progress');
+            progress.style.animation = 'none';
+            progress.offsetHeight; /* trigger reflow */
+            progress.style.animation = null;
+        }
+
+        function closeStatus() {
+             if (window.innerWidth < 768) {
+                document.querySelector('.border-r').classList.remove('-translate-x-full');
+                document.querySelector('.border-r').classList.remove('absolute');
+                document.getElementById('status-viewer').classList.add('hidden');
+            }
+            document.getElementById('status-active').classList.add('hidden');
+            document.getElementById('status-active').classList.remove('flex');
+            document.getElementById('status-welcome').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

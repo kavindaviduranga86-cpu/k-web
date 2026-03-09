@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - WhatsApp Web Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wa: {
+                            bg: '#111b21',
+                            panel: '#202c33',
+                            panelLighter: '#2a3942',
+                            primary: '#00a884',
+                            text: '#e9edef',
+                            textMuted: '#8696a0',
+                            border: '#222d34',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0b141a] text-wa-text h-screen w-screen overflow-hidden flex font-sans">
+    
+    <div class="fixed top-0 left-0 w-full h-[127px] bg-[#00a884] z-[-1]"></div>
+
+    <div class="w-full h-full sm:w-[98%] sm:h-[95%] sm:mt-4 sm:mx-auto flex bg-wa-bg shadow-lg shadow-black/50 rounded-md overflow-hidden z-10">
+        
+        <!-- Settings Sidebar -->
+        <div class="w-full md:w-[30%] lg:w-[30%] xl:w-[25%] lg:min-w-[350px] border-r border-wa-border flex flex-col bg-wa-bg relative z-20">
+            <!-- Header -->
+            <div class="h-[108px] bg-wa-panel flex flex-col justify-end px-6 pb-4">
+                <div class="flex items-center text-wa-text font-medium text-lg">
+                    <button onclick="window.location.href='index.html'" class="mr-6 text-xl hover:text-white transition"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h1>Settings</h1>
+                </div>
+            </div>
+
+            <!-- Profile Overview -->
+            <div class="bg-wa-bg flex items-center p-4 py-5 hover:bg-wa-panelLighter cursor-pointer border-b border-wa-border/50">
+                <img src="https://i.pravatar.cc/150?img=11" class="w-20 h-20 rounded-full object-cover">
+                <div class="ml-4">
+                    <h2 class="text-xl text-wa-text mb-1">Tharuka</h2>
+                    <p class="text-sm text-wa-textMuted">Available</p>
+                </div>
+            </div>
+
+            <!-- Settings List -->
+            <div class="flex-1 overflow-y-auto scrollbar-thin pb-10">
+                <div class="py-2">
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-bell text-wa-textMuted w-8 text-xl"></i>
+                        <span class="text-[15px]">Notifications</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-lock text-wa-textMuted w-8 text-xl"></i>
+                        <span class="text-[15px]">Privacy</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-shield-halved text-wa-textMuted w-8 text-xl"></i>
+                        <span class="text-[15px]">Security</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-sun text-wa-textMuted w-8 text-xl"></i>
+                        <span class="text-[15px]">Theme</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-image text-wa-textMuted w-8 text-[18px]"></i>
+                        <span class="text-[15px]">Chat Wallpaper</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-file-invoice text-wa-textMuted w-8 text-[18px]"></i>
+                        <span class="text-[15px]">Request Account Info</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-keyboard text-wa-textMuted w-8 text-[18px]"></i>
+                        <span class="text-[15px]">Keyboard Shortcuts</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-wa-text">
+                        <i class="fa-solid fa-circle-question text-wa-textMuted w-8 text-[18px]"></i>
+                        <span class="text-[15px]">Help</span>
+                    </div>
+                    <div class="flex items-center px-6 py-4 hover:bg-wa-panelLighter cursor-pointer transition text-[#f15c6d]">
+                        <i class="fa-solid fa-arrow-right-from-bracket text-[#f15c6d] w-8 text-[18px]"></i>
+                        <span class="text-[15px]">Log out</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Area (Settings Details Placeholders) -->
+        <div class="hidden md:flex flex-1 flex-col bg-wa-bg relative border-l border-wa-border items-center justify-center p-8">
+           <img src="https://cdn-icons-png.flaticon.com/512/3256/3256783.png" class="w-64 opacity-5" alt="Settings illustration">
+           <h2 class="text-3xl text-wa-textMuted mt-8 font-light">Select an option to view details</h2>
+        </div>
+    </div>
+</body>
+</html>
